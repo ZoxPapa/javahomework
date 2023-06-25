@@ -12,7 +12,7 @@ public class Homework2 {
         }
         return 1;
     }
-    public static int input_digit(){
+    static int input_digit(){
         System.out.println("Input number: ");
         Scanner my_Scanner = new Scanner(System.in);
         String digit = my_Scanner.nextLine();
