@@ -1,0 +1,4 @@
+Student Иванов got 5 in Математика 
+Student Петрова got 4 in Информатика 
+Student Краснов got 5 in Физика 
+Student Васильев got 3 in Музыка 
