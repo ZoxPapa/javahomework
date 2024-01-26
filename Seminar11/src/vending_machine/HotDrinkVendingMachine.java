@@ -1,5 +1,8 @@
+package vending_machine;
+
 import java.util.ArrayList;
 import java.util.List;
+import product.*;
 
 public class HotDrinkVendingMachine implements VendingMachine{
     private List<HotDrink> hotDrinkList;

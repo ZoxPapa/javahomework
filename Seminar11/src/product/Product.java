@@ -1,3 +1,5 @@
+package product;
+
 public abstract class Product {
     private String name;
     private int price;
@@ -26,7 +28,7 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "product.Product{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
                 '}';

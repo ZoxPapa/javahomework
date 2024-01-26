@@ -1,3 +1,5 @@
+package product;
+
 public class Phone extends Product {
     String color;
 

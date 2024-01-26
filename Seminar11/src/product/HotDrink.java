@@ -1,3 +1,5 @@
+package product;
+
 public class HotDrink extends Product{
     private String name;
     private int price;

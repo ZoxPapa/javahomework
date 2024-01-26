@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
+package vending_machine;
+
+import product.HotDrink;
+import product.Product;
 
 public interface VendingMachine {
     Product getProduct(String name);
