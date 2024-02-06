@@ -1,6 +1,7 @@
 import group.StudentsGroup;
 import stream.Stream;
 import student.Student;
+import student.StudentController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +9,13 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
-        Student student1 = new Student("Max", 18);
-        Student student2 = new Student("Bob", 22);
-        Student student3 = new Student("Lisa", 20);
+        StudentController studentController = new StudentController();
+        Student student1 = studentController.create("Max", 18);
+        Student student2 = studentController.create("Bob", 22);
+        Student student3 = studentController.create("Lisa", 20);
         //создание групп студентов
         StudentsGroup myGroup11 = new StudentsGroup(student1, student2, student3);
+        studentController.sendToConsole(myGroup11.studentList);
         StudentsGroup myGroup21 = new StudentsGroup();
         StudentsGroup myGroup22 = new StudentsGroup();
         StudentsGroup myGroup31 = new StudentsGroup();

@@ -1,20 +1,10 @@
 package student;
 
-public class Student {
-    private String name;
-    private int age;
+import user.User;
+
+public class Student extends User {
 
     public Student(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
+        super(name, age);
     }
 }
