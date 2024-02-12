@@ -8,11 +8,11 @@ import java.awt.event.*;
 
 public class ClientChatWindow extends JFrame {
     static int several_w_pos = 0;
-    private static int W_HEIGHT = 300;
-    private static int W_WIDTH = 500;
-    private static int W_POS_X = 20;
-    private static int W_POS_Y = 40;
-    private ServerWindow serverWindow;
+    private final static int W_HEIGHT = 300;
+    private final static int W_WIDTH = 500;
+    private final static int W_POS_X = 20;
+    private final static int W_POS_Y = 40;
+    private final ServerWindow serverWindow;
     private boolean isLogIn = false;
     private JTextField clientTextField;
     private JTextArea clientView;
@@ -27,8 +27,7 @@ public class ClientChatWindow extends JFrame {
     setResizable(false);
     setTitle("Client Chat");
     this.serverWindow = serverWindow;
-    JPanel header = addHeaderFields();
-    add(header, BorderLayout.NORTH);
+    add(addHeaderFields(), BorderLayout.NORTH);
     add(addFooterFields(), BorderLayout.SOUTH);
 
     setVisible(true);
@@ -46,7 +45,7 @@ public class ClientChatWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NAME = name.getText();
-                if(serverWindow.isServerOn()) {
+                if(serverWindow.getServerStatus()) {
                     logIn(headerPanel);
                 }else{
                     stub.setText("Server is off");
@@ -66,7 +65,6 @@ public class ClientChatWindow extends JFrame {
     private JPanel addFooterFields(){
         JPanel footerPanel = new JPanel(new GridBagLayout());
         clientTextField = new JTextField("");
-        clientTextField.setFocusable(true);
         clientTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -92,7 +90,7 @@ public class ClientChatWindow extends JFrame {
     }
 
     private void sendMessage() {
-        if(isLogIn && serverWindow.isServerOn()) {
+        if(isLogIn && serverWindow.getServerStatus()) {
             serverWindow.getMessage(NAME+": " + clientTextField.getText());
             clientTextField.setText("");
         }

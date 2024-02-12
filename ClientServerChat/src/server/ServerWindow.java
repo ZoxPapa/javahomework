@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ServerWindow extends JFrame {
-    private static int W_HEIGHT = 300;
-    private static int W_WIDTH = 500;
-    private static int W_POS_X = 750;
-    private static int W_POS_Y = 20;
+    private final static int W_HEIGHT = 300;
+    private final static int W_WIDTH = 500;
+    private final static int W_POS_X = 750;
+    private final static int W_POS_Y = 20;
     private StringBuilder chatInfo = readFromDataBase();
-    boolean serverIsOn = false;
+    private boolean serverIsOn = false;
     private JTextArea serverView;
     private List<ClientChatWindow> clientsList = new ArrayList<>();
 
@@ -29,9 +29,17 @@ public class ServerWindow extends JFrame {
         setSize(W_WIDTH, W_HEIGHT);
         setResizable(false);
         setTitle("Server window");
-        refresh();
+        add(addMessageView());
+        add(addFooterButtons(), BorderLayout.SOUTH);
 
         setVisible(true);
+    }
+
+    private JPanel addMessageView(){
+        JPanel jPanel = new JPanel(new GridLayout(1, 1));
+        serverView = new JTextArea("Let's server up");
+        jPanel.add(serverView);
+        return jPanel;
     }
 
     private JPanel addFooterButtons() {
@@ -57,25 +65,13 @@ public class ServerWindow extends JFrame {
         return jPanel;
     }
 
-    private JPanel addMessageView(String chatInfo){
-        JPanel jPanel = new JPanel(new GridLayout(1, 1));
-        serverView = new JTextArea("Let's server up");
-        jPanel.add(serverView);
-        jPanel.setVisible(true);
-        return jPanel;
-    }
-
-    private void refresh(){
-        this.add(addMessageView(chatInfo.toString()));
-        this.add(addFooterButtons(), BorderLayout.SOUTH);
-    }
 
     public void getMessage(String message){
         writeMessageToFile(message);
         chatInfo = readFromDataBase();
             refreshViews();
     }
-    public boolean isServerOn() {
+    public boolean getServerStatus() {
         return serverIsOn;
     }
     public StringBuilder getChatInfo() {
@@ -86,14 +82,14 @@ public class ServerWindow extends JFrame {
         try(FileReader fr = new FileReader("./src/database.txt")){
             Scanner sc = new Scanner(fr);
             while(sc.hasNextLine()){
-                sb.append(sc.nextLine()+"\n");
+                sb.append(sc.nextLine()).append("\n");
             }
         }catch (IOException e){
             e.printStackTrace();
         }
         return sb;
     }
-    static void writeMessageToFile (String message){
+    private void writeMessageToFile (String message){
         try(FileWriter fw = new FileWriter("./src/database.txt", true)){
             fw.write(message + "\n");
         }catch (IOException e){
