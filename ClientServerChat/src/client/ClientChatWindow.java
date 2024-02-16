@@ -1,6 +1,6 @@
 package client;
 
-import server.ServerWindow;
+import server.controller.ServerController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,21 +12,22 @@ public class ClientChatWindow extends JFrame {
     private final static int W_WIDTH = 500;
     private final static int W_POS_X = 20;
     private final static int W_POS_Y = 40;
-    private final ServerWindow serverWindow;
+    private final ServerController serverController;
     private boolean isLogIn = false;
     private JTextField clientTextField;
     private JTextArea clientView;
     private String NAME;
 
 
-    public ClientChatWindow(ServerWindow serverWindow){
+
+    public ClientChatWindow(ServerController serverController){
     setDefaultCloseOperation(HIDE_ON_CLOSE);
     setLocation(W_POS_X + several_w_pos, W_POS_Y+ several_w_pos);
     setSize(W_WIDTH, W_HEIGHT);
     several_w_pos+=40;
     setResizable(false);
     setTitle("Client Chat");
-    this.serverWindow = serverWindow;
+    this.serverController = serverController;
     add(addHeaderFields(), BorderLayout.NORTH);
     add(addFooterFields(), BorderLayout.SOUTH);
 
@@ -45,7 +46,7 @@ public class ClientChatWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NAME = name.getText();
-                if(serverWindow.getServerStatus()) {
+                if(serverController.getServerStatus()) {
                     logIn(headerPanel);
                 }else{
                     stub.setText("Server is off");
@@ -90,8 +91,8 @@ public class ClientChatWindow extends JFrame {
     }
 
     private void sendMessage() {
-        if(isLogIn && serverWindow.getServerStatus()) {
-            serverWindow.getMessage(NAME+": " + clientTextField.getText());
+        if(isLogIn && serverController.getServerStatus()) {
+            serverController.getMessage(NAME+": " + clientTextField.getText());
             clientTextField.setText("");
         }
     }
@@ -99,21 +100,21 @@ public class ClientChatWindow extends JFrame {
     private void logIn(JPanel headerPanel){
         headerPanel.setVisible(false);
         JPanel jPanel = new JPanel(new GridLayout(1, 1));
-        clientView = new JTextArea(readFromDataBase().toString());
+        clientView = new JTextArea(readFromDataBase());
         jPanel.add(clientView);
         jPanel.setVisible(true);
         this.add(jPanel);
         this.isLogIn = true;
 
-        serverWindow.addClient(this);
+        serverController.addClient(this);
     }
 
-    private StringBuilder readFromDataBase() {
-        return serverWindow.getChatInfo();
+    private String readFromDataBase() {
+        return serverController.getChatHistory();
     }
 
     public void refreshClientView() {
-        this.clientView.setText(readFromDataBase().toString());
+        this.clientView.setText(readFromDataBase());
     }
 
     public String getNAME(){
