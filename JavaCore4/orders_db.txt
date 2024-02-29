@@ -1,0 +1,5 @@
+ID: 1, customer: Bob, product: Apple, qty: 2, totalOrderPrice: 20
+ID: 2, customer: Bob, product: Orange, qty: 10, totalOrderPrice: 150
+ID: 3, customer: Lisa, product: Banana, qty: 200, totalOrderPrice: 2400
+ID: 4, customer: Lisa, product: Apple, qty: 4, totalOrderPrice: 40
+ID: 5, customer: Bob, product: Banana, qty: 123, totalOrderPrice: 1476

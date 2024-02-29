@@ -11,12 +11,13 @@ public class Main {
         workersList.add(worker0);workersList.add(worker1);
         workersList.add(worker2);workersList.add(worker3);
 
-        System.out.println(workersList);
-        worker0.increaseSalary(workersList, 999);
-        System.out.println(workersList);
+//        System.out.println(workersList);
+//        worker0.increaseSalary(workersList, 999);
+//        System.out.println(workersList);
+//
+//        Collections.sort(workersList);
+//        System.out.println(workersList);
 
-        Collections.sort(workersList);
-        System.out.println(workersList);
 
 
     }

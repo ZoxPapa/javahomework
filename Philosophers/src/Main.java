@@ -1,10 +1,10 @@
 
 public class Main {
-    private static volatile Fork fork1 = new Fork();
-    private static volatile Fork fork2= new Fork();
-    private static volatile Fork fork3= new Fork();
-    private static volatile Fork fork4= new Fork();
-    private static volatile Fork fork5= new Fork();
+    private static final Fork fork1 = new Fork();
+    private static final Fork fork2= new Fork();
+    private static final Fork fork3= new Fork();
+    private static final Fork fork4= new Fork();
+    private static final Fork fork5= new Fork();
 
     public static void main(String[] args) {
 
