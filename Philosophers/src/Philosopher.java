@@ -12,7 +12,7 @@ public class Philosopher implements Runnable{
     public void run() {
         while (timesToEat < 3) {
             try {
-                eat();
+                synchEat();
                 think();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -22,7 +22,7 @@ public class Philosopher implements Runnable{
     }
 
     private void think() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(100);
     }
 
     public Philosopher(String name, Fork leftFork, Fork rightFork) {
@@ -32,12 +32,11 @@ public class Philosopher implements Runnable{
     }
 
     private void eat() throws InterruptedException {
-        synch();
         if (leftFork.isFree && rightFork.isFree) {
             this.leftFork.isFree = false;
             this.rightFork.isFree = false;
             System.out.printf(name + " take forks: %s, %s. \n", this.leftFork.number, this.rightFork.number);
-            Thread.sleep(new Random().nextInt(5000));
+            Thread.sleep(new Random().nextInt(100));
             timesToEat++;
             System.out.println(name +" finished his "+ timesToEat + " dish.");
             this.leftFork.isFree = true;
@@ -45,15 +44,18 @@ public class Philosopher implements Runnable{
         }
     }
 
-    private synchronized void synch() {
+    private synchronized void synchEat() throws InterruptedException {
         if(leftFork.number<rightFork.number){
             synchronized (leftFork){
                 synchronized (rightFork){
+                    eat();
                 }
             }
         }else {
             synchronized (rightFork){
-                synchronized (leftFork){}
+                synchronized (leftFork){
+                    eat();
+                }
             }
         }
     }
