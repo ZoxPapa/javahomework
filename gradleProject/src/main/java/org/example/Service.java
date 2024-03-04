@@ -6,14 +6,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Service {
-    DoorsStand doorsStand = new DoorsStand();
+    private final DoorsStand doorsStand = new DoorsStand();
     int hostChoice;
     Random random = new Random();
     int playerChoice;
-
-    private int getRandomDoorNumber(){
-        return random.nextInt(4);
-    }
 
     public void getPlayerChoice(){
         Scanner sc = new Scanner(System.in);
@@ -22,6 +18,11 @@ public class Service {
     public void getPlayerRandomChoice(){
         this.playerChoice = random.nextInt(3);
     }
+
+    public DoorsStand getDoorsStand() {
+        return doorsStand;
+    }
+
     public void getHostChoice(){
         for(Map.Entry entry: doorsStand.doors.entrySet()){
             if(!entry.getKey().equals(playerChoice) &&
