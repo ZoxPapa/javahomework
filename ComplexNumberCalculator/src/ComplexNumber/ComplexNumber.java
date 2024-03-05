@@ -1,15 +1,23 @@
 package ComplexNumber;
 
 public class ComplexNumber {
-    String firstPart;
-    String secondPart;
-    public ComplexNumber(String firstPart, String secondPart) {
+    int firstPart;
+    int secondPart;
+    public ComplexNumber(int firstPart, int secondPart) {
         this.firstPart = firstPart;
         this.secondPart = secondPart;
     }
 
+    public int getFirstPart() {
+        return firstPart;
+    }
+
+    public int getSecondPart() {
+        return secondPart;
+    }
+
     @Override
     public String toString() {
-        return firstPart+"+"+secondPart;
+        return secondPart>=0? firstPart+"+"+secondPart+"i" : ""+firstPart+secondPart+"i";
     }
 }

@@ -1,8 +1,7 @@
 package calculator.command;
 
-import calculator.Calculator;
 
-public interface Command <T>{
+public interface Command{
     void execute();
 
 }

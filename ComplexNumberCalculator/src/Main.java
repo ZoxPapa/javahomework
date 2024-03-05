@@ -18,7 +18,7 @@ public class Main {
         Command multCommand = new MultCommand<>(n1, n2, calculator);
 
         sumCommand.execute();
-        divCommand.execute();
         multCommand.execute();
+        divCommand.execute();
     }
 }
