@@ -1,9 +1,15 @@
+package market;
+
+import actors.Actor;
+import market.interfaces.MarkerBehaviour;
+import market.interfaces.QueueBehaviour;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Market implements QueueBehaviour, MarkerBehaviour{
+public class Market implements QueueBehaviour, MarkerBehaviour {
 
-    private List<Actor> queue;
+    private final List<Actor> queue;
     public Market() {
         this.queue = new ArrayList<Actor>();
     }
@@ -28,13 +34,13 @@ public class Market implements QueueBehaviour, MarkerBehaviour{
         this.queue.add(actor);
         System.out.println(actor.getName() + " stand in queue");
     }
-
+//Изменены обращения к полям класса actor. Вместо обращения напрямую к полям используются геттеры и сеттеры.
     @Override
     public void takeOrders() {
         for (Actor actor:this.queue) {
-            if(actor.isMakeOrder == false){
+            if(!actor.isMakeOrder()){
                 System.out.println(actor.getName()+" make order");
-                actor.isMakeOrder = true;
+                actor.setMakeOrder(true);
             }
         }
     }
@@ -42,9 +48,9 @@ public class Market implements QueueBehaviour, MarkerBehaviour{
     @Override
     public void giveOrders() {
         for (Actor actor:this.queue) {
-            if(actor.isMakeOrder = true){
-                actor.isTakeOrder = true;
-                actor.isMakeOrder = false;
+            if(actor.isMakeOrder()){
+                actor.setTakeOrder(true);
+                actor.setMakeOrder(false);
                 System.out.println(actor.getName()+" take order");
             }
         }
@@ -54,7 +60,7 @@ public class Market implements QueueBehaviour, MarkerBehaviour{
     public void releaseFromQueue() {
         List<Actor> actorsWithOrders = new ArrayList<>();
         for (Actor actor:this.queue) {
-            if(actor.isTakeOrder = true){
+            if(actor.isTakeOrder()){
                 actorsWithOrders.add(actor);
                 System.out.println(actor.getName()+" quit the queue");
             }
@@ -64,13 +70,11 @@ public class Market implements QueueBehaviour, MarkerBehaviour{
     }
     @Override
     public void releaseFromMarket(List<Actor> actors) {
-//        List<Actor>resultActorsList = this.queue;
         for(Actor actor: actors){
             if(this.queue.contains(actor)){
                 queue.remove(actor);
                 System.out.println(actor.getName() +" quit the market");
             }
         }
-//        this.queue=resultActorsList;
     }
 }

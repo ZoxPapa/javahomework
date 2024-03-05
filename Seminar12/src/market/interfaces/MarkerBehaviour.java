@@ -1,3 +1,7 @@
+package market.interfaces;
+
+import actors.Actor;
+
 import java.util.List;
 
 public interface MarkerBehaviour {
